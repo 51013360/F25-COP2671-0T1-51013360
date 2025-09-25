@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    // Initialize variables
     public GameObject obstaclePrefab;
     private Vector3 spawnPos = new Vector3(25, 0, 0);
     private float startDelay = 2;
@@ -11,7 +12,10 @@ public class SpawnManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // Continuously spawn obstacles at a set interval after a delay
         InvokeRepeating("SpawnObstacle", startDelay, repeatRate);
+
+        // Bring over elements from PlayerController script
         playerControllerScript = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
@@ -21,6 +25,7 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    // Method that spawns obstacle prefab, which is invoked repeatedly in the Start() method
     void SpawnObstacle()
     {
         if (playerControllerScript.gameOver == false)
