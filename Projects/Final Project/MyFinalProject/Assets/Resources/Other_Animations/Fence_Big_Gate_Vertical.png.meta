@@ -138,7 +138,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 56
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -160,7 +160,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 32
-        y: 56
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -182,7 +182,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 64
-        y: 56
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -203,8 +203,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_3
       rect:
         serializedVersion: 2
-        x: 96
-        y: 56
+        x: 80
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -225,8 +225,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_4
       rect:
         serializedVersion: 2
-        x: 112
-        y: 56
+        x: 96
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -247,8 +247,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_5
       rect:
         serializedVersion: 2
-        x: 128
-        y: 56
+        x: 112
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -269,8 +269,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_6
       rect:
         serializedVersion: 2
-        x: 144
-        y: 56
+        x: 128
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -291,8 +291,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_7
       rect:
         serializedVersion: 2
-        x: 0
-        y: 40
+        x: 144
+        y: 48
         width: 16
         height: 16
       alignment: 0
@@ -313,8 +313,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_8
       rect:
         serializedVersion: 2
-        x: 32
-        y: 40
+        x: 0
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -335,8 +335,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_9
       rect:
         serializedVersion: 2
-        x: 64
-        y: 40
+        x: 32
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -357,8 +357,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_10
       rect:
         serializedVersion: 2
-        x: 80
-        y: 40
+        x: 64
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -379,8 +379,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_11
       rect:
         serializedVersion: 2
-        x: 96
-        y: 40
+        x: 80
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -402,7 +402,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 40
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -423,8 +423,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_13
       rect:
         serializedVersion: 2
-        x: 128
-        y: 40
+        x: 0
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -445,8 +445,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_14
       rect:
         serializedVersion: 2
-        x: 144
-        y: 40
+        x: 32
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -467,8 +467,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_15
       rect:
         serializedVersion: 2
-        x: 0
-        y: 24
+        x: 64
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -489,8 +489,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_16
       rect:
         serializedVersion: 2
-        x: 32
-        y: 24
+        x: 80
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -511,8 +511,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_17
       rect:
         serializedVersion: 2
-        x: 64
-        y: 24
+        x: 96
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -533,8 +533,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_18
       rect:
         serializedVersion: 2
-        x: 80
-        y: 24
+        x: 112
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -555,8 +555,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_19
       rect:
         serializedVersion: 2
-        x: 96
-        y: 24
+        x: 128
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -577,8 +577,8 @@ TextureImporter:
       name: Fence_Big_Gate_Vertical_20
       rect:
         serializedVersion: 2
-        x: 112
-        y: 24
+        x: 144
+        y: 16
         width: 16
         height: 16
       alignment: 0
@@ -591,226 +591,6 @@ TextureImporter:
       bones: []
       spriteID: 92d5bb0079698404eab6ef02f9761326
       internalID: 634029755
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_21
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 24
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ef7523bf72fb70439ba8361b131480e
-      internalID: -110493395
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_22
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 24
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4b6ef0f89029d0744a3887f6706490a9
-      internalID: -621869554
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_23
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ea4e2a4d05e29d4c81f44375f8f48cd
-      internalID: -2136062284
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_24
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ae3e833a370360e40a4e278ee67752ca
-      internalID: -470384201
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_25
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ac00ab5c071a0948b20fe03a477fb37
-      internalID: 1321850622
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_26
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a44c0dafff11afc4f9f717e1666ddc36
-      internalID: -498437848
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_27
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e7fe5e620c82a7c42a4876235628536a
-      internalID: 1330516281
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_28
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7b92c424795267143a0d168e46ca5a78
-      internalID: 656881191
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_29
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb40e83a89a569e4780d7444063c78b0
-      internalID: -1447060248
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Fence_Big_Gate_Vertical_30
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 8
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bf11877c9190e074dbe93f8353fb3238
-      internalID: -990874494
       vertices: []
       indices: 
       edges: []
@@ -843,17 +623,7 @@ TextureImporter:
       Fence_Big_Gate_Vertical_19: 769303177
       Fence_Big_Gate_Vertical_2: -8428979701036505133
       Fence_Big_Gate_Vertical_20: 634029755
-      Fence_Big_Gate_Vertical_21: -110493395
-      Fence_Big_Gate_Vertical_22: -621869554
-      Fence_Big_Gate_Vertical_23: -2136062284
-      Fence_Big_Gate_Vertical_24: -470384201
-      Fence_Big_Gate_Vertical_25: 1321850622
-      Fence_Big_Gate_Vertical_26: -498437848
-      Fence_Big_Gate_Vertical_27: 1330516281
-      Fence_Big_Gate_Vertical_28: 656881191
-      Fence_Big_Gate_Vertical_29: -1447060248
       Fence_Big_Gate_Vertical_3: -8685631618961198879
-      Fence_Big_Gate_Vertical_30: -990874494
       Fence_Big_Gate_Vertical_4: -1454915151589436048
       Fence_Big_Gate_Vertical_5: -8590265835556364311
       Fence_Big_Gate_Vertical_6: -7821349398649068375
