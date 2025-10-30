@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 _lastPlayerInput;
     private Rigidbody2D _rigidBody;
 
+    [SerializeField] private Animator _animator;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -20,6 +23,16 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _lastPlayerInput = PlayerInput.normalized;
+
+        // Set animator parameters
+        _animator.SetFloat("MoveX", _lastPlayerInput.x);
+        _animator.SetFloat("MoveY", _lastPlayerInput.y);
+
+        // Handle flipping for left movement
+        if (_lastPlayerInput.x < 0)
+            _spriteRenderer.flipX = true; // moving left
+        else if (_lastPlayerInput.x > 0)
+            _spriteRenderer.flipX = false; // moving right
     }
 
     private void FixedUpdate()
