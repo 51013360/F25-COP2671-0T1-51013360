@@ -1,27 +1,36 @@
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
-[RequireComponent(typeof(Light2D))]
-
-public class DayNightController : MonoBehaviour
+public class DayNightController : SingletonMonoBehaviour<DayNightController>
 {
-    [Header("References")]
-    public TimeManager _timeManager;
-    public Gradient _dayNightColors;
-    public AnimationCurve _lightIntensityCurve;
+    public static DayNightEvents Events => Instance._events;
+    public static DayNightLighting Lighting => Instance._lighting;
 
-    private Light2D _light;
+    [SerializeField] private int StartingHour;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private DayNightEvents _events;
+    private DayNightLighting _lighting;
+
+    private void OnEnable()
     {
-        _light = GetComponent<Light2D>();
+        TimeManager.OnTimerUpdate.AddListener(UpdateDayCycle);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
-        _light.color = _dayNightColors.Evaluate(_timeManager.Now);
-        _light.intensity = _lightIntensityCurve.Evaluate(_timeManager.Now);
+        TimeManager.OnTimerUpdate.RemoveListener(UpdateDayCycle);
+    }
+
+    protected override void InitializeAfterAwake()
+    {
+        TimeManager.SetStartHour(StartingHour);
+
+        _events = GetComponent<DayNightEvents>();
+        _lighting = GetComponent<DayNightLighting>();
+    }
+
+    private void UpdateDayCycle(float normalizedTime)
+    {
+        _events.Evaluate(normalizedTime);
+        _lighting.Evaluate(normalizedTime);
     }
 }

@@ -1,52 +1,85 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TimeManager : MonoBehaviour
+/// <summary>
+/// Manages the in-game time cycle, simulating a 24-hour day over a configurable real-time duration.
+/// </summary>
+public class TimeManager : SingletonMonoBehaviour<TimeManager>
 {
-    public const int HOURSPERDAY = 24;
-    public const float SECONDSINMINUTE = 60f;
+    // Constants for time conversion and in-game day length
+    public static int HOURS_PER_DAY = 24;
+    public static int SECONDS_PER_MINUTE = 60;
 
-    public UnityEvent<float> OnUpdateTrigger;
+    // Events triggered during time updates and hourly changes
+    public static UnityEvent<float> OnTimerUpdate = new UnityEvent<float>();       // Normalized time update (0 to 1)
 
     [Header("Time Settings")]
-    [SerializeField] private float _realTimeMinutesPerDay = 15f;
+    [SerializeField] private float _realTimeMinutesPerDay = 15f; // Duration of one in-game day in real minutes
     [SerializeField] private float _timeMultiplier = 1f;
-    [SerializeField] private bool _isCycleActive = true;
-    [SerializeField] private float _updateInterval = 0.1f;
-    [SerializeField] private float _normalizedTime;
+    [SerializeField] private bool _isCycleActive = true;         // Controls whether the time cycle is running
 
-    private float DurationInSeconds => _realTimeMinutesPerDay * SECONDSINMINUTE; // 15 * 60 = 900
-    private float _calculateTime;
-    public float Now => _normalizedTime;
+    // Converts real-time minutes to seconds for internal calculations
+    private float DurationOfDayInSeconds => _realTimeMinutesPerDay * SECONDS_PER_MINUTE;
 
-    private float _updateTimer;
+    // Internal state variables
+    private Coroutine _dayCycleCoroutine;
+    [SerializeField] private float _calculateTime;
+    [SerializeField] private float _normalizedTime;   // Value between 0 and 1 representing time progression
+    private float _updateTimer;      // Accumulated real-time seconds
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    /// <summary>
+    /// Starts the day cycle coroutine when the game begins.
+    /// </summary>
+    private void Start()
     {
-        StartCoroutine(TimerRoutine());
+        _realTimeMinutesPerDay = Mathf.Max(1f, _realTimeMinutesPerDay);
+        _dayCycleCoroutine = StartCoroutine(TimerRoutine());
     }
 
+    /// <summary>
+    /// Coroutine that updates the in-game time based on real-time progression.
+    /// </summary>
     private IEnumerator TimerRoutine()
     {
-        while (enabled)
+        var wait = new WaitForEndOfFrame(); // Reuse yield instruction to reduce allocations
+
+        while (isActiveAndEnabled)
         {
-            if (_isCycleActive)
-            {
-                _updateTimer += Time.deltaTime;
+            // Wait here until the cycle is active again
+            yield return new WaitUntil(() => _isCycleActive);
 
-                if (_updateTimer >= _updateInterval)
-                {
-                    _normalizedTime = (_calculateTime % DurationInSeconds) / DurationInSeconds;
-                    OnUpdateTrigger.Invoke(_normalizedTime);
+            // Accumulate time since last frame
+            _updateTimer += Time.deltaTime;
 
-                    _calculateTime += _updateTimer * _timeMultiplier;
-                    _calculateTime %= DurationInSeconds;
-                    _updateTimer = 0f;
-                }
-            }
-        yield return null;
+            // Normalize time to a 0�1 range
+            _normalizedTime = (_calculateTime % DurationOfDayInSeconds) / DurationOfDayInSeconds;
+
+            // Trigger OnTimerUpdate event every frame
+            OnTimerUpdate?.Invoke(_normalizedTime);
+
+            // Calculate time within the current day cycle
+            _calculateTime += _updateTimer * _timeMultiplier;
+            _calculateTime %= DurationOfDayInSeconds;
+            _updateTimer = 0f;
+
+            yield return wait;
         }
+    }
+
+    /// <summary>
+    /// Toggles the time cycle between paused and active states.
+    /// </summary>
+    public void TogglePause()
+    {
+        _isCycleActive = !_isCycleActive;
+    }
+    /// <summary>
+    /// Sets the starting hour
+    /// </summary>
+    /// <param name="hour"></param>
+    public static void SetStartHour(int hour)
+    {
+        Instance._calculateTime = (Instance.DurationOfDayInSeconds * hour / HOURS_PER_DAY) % Instance.DurationOfDayInSeconds;
     }
 }
