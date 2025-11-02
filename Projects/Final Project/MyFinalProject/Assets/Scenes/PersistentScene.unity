@@ -131,7 +131,6 @@ GameObject:
   - component: {fileID: 82962583}
   - component: {fileID: 82962582}
   - component: {fileID: 82962581}
-  - component: {fileID: 82962580}
   - component: {fileID: 82962585}
   m_Layer: 0
   m_Name: TimeManager
@@ -140,19 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &82962580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 82962579}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66f7915979927f24f83ec8388eb0aa4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingHour: 0
 --- !u!114 &82962581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,13 +151,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7698b915fd7246c4c87da4f5b077bed2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayNightColors:
+  _colorOverDay:
     serializedVersion: 2
-    key0: {r: 0.019607844, g: 0.047058824, b: 0.14901961, a: 1}
-    key1: {r: 1, g: 0.54901963, b: 0.29803923, a: 1}
-    key2: {r: 1, g: 0.98039216, b: 0.8627451, a: 0}
-    key3: {r: 0.9490196, g: 0.4, b: 0.3019608, a: 0}
-    key4: {r: 0.03137255, g: 0.07450981, b: 0.18039216, a: 0}
+    key0: {r: 0.039215688, g: 0.047058824, b: 0.101960786, a: 1}
+    key1: {r: 1, g: 0.61960787, b: 0.43137255, a: 1}
+    key2: {r: 1, g: 0.972549, b: 0.88235295, a: 0}
+    key3: {r: 1, g: 0.47058824, b: 0.30588236, a: 0}
+    key4: {r: 0.11764706, g: 0.16470589, b: 0.3529412, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
@@ -195,7 +181,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
-  lightIntensityCurve:
+  _intensityCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -208,10 +194,28 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 0.25
+      value: 0.5
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 0.5
       value: 1
       inSlope: 0
       outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.75
+      value: 0.5
+      inSlope: -2
+      outSlope: -2
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
@@ -319,74 +323,19 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 82962579}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23ded6d5c118b7340b53bc8007f5a9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sunRiseHour: 6
-  sunSetHour: 10
-  OnSunRise:
+  _sunriseHour: 6
+  _sunsetHour: 18
+  OnSunrise:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 82962585}
-        m_TargetAssemblyTypeName: DayNightEvents, Assembly-CSharp
-        m_MethodName: Evaluate
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnSunset:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 82962585}
-        m_TargetAssemblyTypeName: DayNightEvents, Assembly-CSharp
-        m_MethodName: Evaluate
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnHour:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 82962585}
-        m_TargetAssemblyTypeName: DayNightEvents, Assembly-CSharp
-        m_MethodName: Evaluate
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnNewDay:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 82962585}
-        m_TargetAssemblyTypeName: DayNightEvents, Assembly-CSharp
-        m_MethodName: Evaluate
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  <CurrentHour>k__BackingField: 0
+      m_Calls: []
 --- !u!1 &274243929
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,62 +1,50 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Handles events that occur at sunrise and sunset based on the in-game time.
+/// </summary>
 public class DayNightEvents : MonoBehaviour
 {
-    private const int MIDNIGHT = 0;
-
     [Header("Event Hours")]
-    [SerializeField] private int sunRiseHour = 6;
-    [SerializeField] private int sunSetHour = 18;
+    [Range(0, 23)][SerializeField] private int _sunriseHour = 6;
+    [Range(0, 23)][SerializeField] private int _sunsetHour = 18;
 
     [Header("Day-Night Events")]
-    public UnityEvent OnSunRise;
+    public UnityEvent OnSunrise;
     public UnityEvent OnSunset;
-    public UnityEvent<int> OnHour;
-    public UnityEvent OnNewDay;
 
-    [field: SerializeField] public int CurrentHour { get; private set; }
+    private bool _sunriseTriggered;
+    private bool _sunsetTriggered;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void OnEnable()
     {
-        CurrentHour = -1;
+        TimeManager.OnTimerUpdate.AddListener(HandleTimeUpdate);
     }
 
-    public void Evaluate(float normalizedTime)
+    private void OnDisable()
     {
-        int calculatedHour = Mathf.FloorToInt(normalizedTime * TimeManager.HOURS_PER_DAY) % TimeManager.HOURS_PER_DAY;
-
-        if (calculatedHour == CurrentHour) return;
-
-        TriggerMidnightEvent(calculatedHour);
-        TriggerSunriseEvent(calculatedHour);
-        TriggerSunset(calculatedHour);
-        TriggerHourlyEvent(calculatedHour);
-
-        CurrentHour = calculatedHour;
+        TimeManager.OnTimerUpdate.RemoveListener(HandleTimeUpdate);
     }
 
-    private void TriggerSunset(int hour)
+    private void HandleTimeUpdate(float normalizedTime)
     {
-        if (hour == sunSetHour)
+        // Convert normalized time (0–1) into an in-game hour
+        float currentHour = normalizedTime * TimeManager.HOURS_PER_DAY;
+
+        // Trigger sunrise event
+        if (!_sunriseTriggered && currentHour >= _sunriseHour && currentHour < _sunsetHour)
+        {
+            OnSunrise?.Invoke();
+            _sunriseTriggered = true;
+            _sunsetTriggered = false;
+        }
+        // Trigger sunset event
+        else if (!_sunsetTriggered && (currentHour >= _sunsetHour || currentHour < _sunriseHour))
+        {
             OnSunset?.Invoke();
-    }
-    
-    private void TriggerSunriseEvent(int hour)
-    {
-        if (hour == sunRiseHour)
-            OnSunRise?.Invoke();
-    }
-
-    private void TriggerMidnightEvent(int hour)
-    {
-        if (hour == MIDNIGHT)
-            OnNewDay?.Invoke();
-    }
-
-    private void TriggerHourlyEvent(int hour)
-    {
-        OnHour?.Invoke(hour);
+            _sunsetTriggered = true;
+            _sunriseTriggered = false;
+        }
     }
 }
