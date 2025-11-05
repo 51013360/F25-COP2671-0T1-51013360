@@ -186,7 +186,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -196,8 +196,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.25
       value: 0.5
-      inSlope: 2
-      outSlope: 2
+      inSlope: 1.6
+      outSlope: 1.6
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
@@ -214,15 +214,15 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.75
       value: 0.5
-      inSlope: -2
-      outSlope: -2
+      inSlope: -1.6
+      outSlope: -1.6
       tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0
+      value: 0.2
       inSlope: 0
       outSlope: 0
       tangentMode: 136
@@ -296,7 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d947bd1e858247469aa6ae793ce8b58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _realTimeMinutesPerDay: 15
+  _realTimeMinutesPerDay: 2
   _timeMultiplier: 1
   _isCycleActive: 1
   _calculateTime: 0
@@ -813,6 +813,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 942098194}
+  - component: {fileID: 942098196}
+  - component: {fileID: 942098195}
   m_Layer: 0
   m_Name: CropGrid
   m_TagString: Untagged
@@ -835,6 +837,30 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &942098195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942098193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee75e8625afdc642a2647cd5b489c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &942098196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942098193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a58fa839cdaf7ea4f8a6035fd746f6fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2399782517109389492
 PrefabInstance:
   m_ObjectHideFlags: 0
