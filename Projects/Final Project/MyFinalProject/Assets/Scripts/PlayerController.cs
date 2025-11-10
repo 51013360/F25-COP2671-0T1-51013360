@@ -24,9 +24,12 @@ public class PlayerController : MonoBehaviour
     {
         _lastPlayerInput = PlayerInput.normalized;
 
+        bool isMoving = _lastPlayerInput.sqrMagnitude > 0.01f;
+
         // Set animator parameters
         _animator.SetFloat("MoveX", _lastPlayerInput.x);
         _animator.SetFloat("MoveY", _lastPlayerInput.y);
+        _animator.SetBool("IsMoving", isMoving);
 
         // Handle flipping for left movement
         if (_lastPlayerInput.x < 0)
