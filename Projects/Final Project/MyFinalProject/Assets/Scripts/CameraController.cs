@@ -1,36 +1,35 @@
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
-    private Transform _target;
-    private Transform _clampMin, _clampMax;
-    private Camera _camera;
-    private float zOffset = -10f;
-    private float _halfWidth, _halfHeight;
+    [SerializeField] private Transform target;      // Player to follow
+    [SerializeField] private float smoothSpeed = 0.125f;
+    [SerializeField] private Vector2 minBounds;     // Bottom-left map limit
+    [SerializeField] private Vector2 maxBounds;     // Top-right map limit
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float camHalfHeight;
+    private float camHalfWidth;
+
+    private void Start()
     {
-        _target = FindAnyObjectByType<PlayerController>().transform;
-        _clampMin = transform.GetChild(0);
-        _clampMax = transform.GetChild(1);
-
-        _clampMin.SetParent(null);
-        _clampMax.SetParent(null);
-
-        _camera = GetComponent<Camera>();
-        _halfHeight = _camera.orthographicSize;
-        _halfWidth = _camera.orthographicSize * _camera.aspect;
+        // Calculate camera bounds based on orthographic size and aspect ratio
+        Camera cam = GetComponent<Camera>();
+        camHalfHeight = cam.orthographicSize;
+        camHalfWidth = cam.aspect * camHalfHeight;
     }
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(_target.position.x, _target.position.y, _target.position.z + zOffset);
+        if (target == null) return;
 
-        var clampedPosition = transform.position;
-        clampedPosition.x = Mathf.Clamp(clampedPosition.x, _clampMin.position.x - _halfWidth, _clampMax.position.x);
-        clampedPosition.y = Mathf.Clamp(clampedPosition.y, _clampMin.position.y - _halfHeight, _clampMax.position.y);
+        // Follow player
+        Vector3 desiredPosition = target.position;
 
-        transform.position = clampedPosition;
+        // Clamp camera so it stays within map bounds
+        float clampedX = Mathf.Clamp(desiredPosition.x, minBounds.x + camHalfWidth, maxBounds.x - camHalfWidth);
+        float clampedY = Mathf.Clamp(desiredPosition.y, minBounds.y + camHalfHeight, maxBounds.y - camHalfHeight);
+
+        Vector3 smoothedPosition = new Vector3(clampedX, clampedY, transform.position.z);
+        transform.position = smoothedPosition;
     }
 }
