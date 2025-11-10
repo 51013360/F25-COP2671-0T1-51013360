@@ -1279,6 +1279,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a58fa839cdaf7ea4f8a6035fd746f6fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _plowedSoilSR: {fileID: 0}
+  _plowedSoilIcon: {fileID: -761770585386879356, guid: a787d978b74a56f40b7cf02bc7a54910, type: 3}
+  _wateredSoilSR: {fileID: 0}
+  _wateredSoilIcon: {fileID: 6177667884121938845, guid: 630c65f1a6ea2764aa6c2b72485b7fd7, type: 3}
+  _cropSR: {fileID: 0}
 --- !u!114 &978213332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,6 +1296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee75e8625afdc642a2647cd5b489c68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _cropBlockPrefab: {fileID: 978213331}
+  _plantedCrops: []
 --- !u!156049354 &978213333
 Grid:
   m_ObjectHideFlags: 0
