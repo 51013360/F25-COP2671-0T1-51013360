@@ -1,32 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewSeedPacket", menuName = "Farming/Seed Packet")]
+[CreateAssetMenu(fileName = "New SeedPacket", menuName = "Farm/SeedPacket")]
 public class SeedPacket : ScriptableObject
 {
-    public string CropName;
-    public Sprite[] GrowthSprites; // 0 = Seed, 1 = Sprout, 2 = Grown, 3 = Mature
-    public GameObject HarvestPrefab;
-
-    // Optional: adjust how fast crops grow
-    public int DaysPerStage = 1;
-
-    // Defines each growth stage
-    public enum GrowthStage
-    {
-        Seed,
-        Sprout,
-        Grown,
-        Mature
-    }
-
-    // Returns the appropriate sprite for the current stage
-    public Sprite GetIconForStage(GrowthStage stage)
-    {
-        int index = (int)stage;
-        if (GrowthSprites == null || GrowthSprites.Length == 0)
-            return null;
-        if (index >= GrowthSprites.Length)
-            index = GrowthSprites.Length - 1;
-        return GrowthSprites[index];
-    }
+    public string cropName;
+    [Tooltip("Sprites representing growth stages in order (0..3)")]
+    public Sprite[] growthSprites; // expected length 4
+    public Sprite coverImage;
+    public GameObject harvestablePrefab; // prefab spawned when harvested (optional)
+    [Tooltip("Seconds per growth stage when watered. Use larger for longer growth.")]
+    public float secondsPerStage = 120f;
 }

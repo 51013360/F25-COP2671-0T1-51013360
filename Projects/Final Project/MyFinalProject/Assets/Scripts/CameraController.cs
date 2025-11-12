@@ -3,7 +3,6 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform target;      // Player to follow
-    [SerializeField] private float smoothSpeed = 0.125f;
     [SerializeField] private Vector2 minBounds;     // Bottom-left map limit
     [SerializeField] private Vector2 maxBounds;     // Top-right map limit
 
