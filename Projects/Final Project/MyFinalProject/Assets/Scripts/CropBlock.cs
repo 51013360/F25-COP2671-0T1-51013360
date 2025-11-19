@@ -1,122 +1,60 @@
-using System.Collections;
 using UnityEngine;
 
 public class CropBlock : MonoBehaviour
 {
-    public enum CropState { Empty, Plowed, Planted, Growing, ReadyToHarvest }
+    public SpriteRenderer soilSR;
+    public SpriteRenderer cropSR;
+    public SpriteRenderer waterSR;
+    public Seedling currentSeedPrefab;
 
-    [Header("Inspector references")]
-    public SpriteRenderer spriteRenderer;
+    private Sprite soilSprite;
+    private Sprite waterSprite;
+    private Sprite cropSprite;
 
-    [HideInInspector] public Vector2Int GridLocation; // tile coords
-    [HideInInspector] public CropState State = CropState.Empty;
-    [HideInInspector] public SeedPacket plantedSeed;
-    [HideInInspector] public int currentStage = 0; // 0..3
-    [HideInInspector] public bool watered = false;
+    private bool isPlowed;
+    private bool isWatered;
+    private Seedling planting;
 
-    Coroutine growthRoutine;
-
-    void Reset()
+    public void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        soilSprite = soilSR.sprite;
+        waterSprite = waterSR.sprite;
+        cropSprite = cropSR.sprite;
+
+        soilSR.sprite = null;
+        waterSR.sprite = null;
+        cropSR.sprite = null;
     }
 
-    // Called when soil is ploughed
-    public void TillSoil()
+    public void PlowCrop()
     {
-        if (State == CropState.Empty)
+        if (isPlowed == false)
         {
-            State = CropState.Plowed;
-            spriteRenderer.sprite = null; // show ploughed soil sprite if you have one
+            soilSR.sprite = soilSprite;
+            isPlowed = true;
         }
     }
 
-    public void WaterSoil()
+    public void WaterCrop()
     {
-        if (State == CropState.Plowed || State == CropState.Planted || State == CropState.Growing)
-        {
-            watered = true;
-        }
+        if (isPlowed == false) return;
+        if (isWatered) return;
+
+        waterSR.sprite = waterSprite;
+        isWatered = true;
     }
 
-    public void PlantSeed(SeedPacket seed)
+    public void PlantCrop()
     {
-        if (seed == null) return;
-        if (State == CropState.Plowed)
-        {
-            plantedSeed = seed;
-            State = CropState.Planted;
-            currentStage = 0;
-            UpdateSprite();
-            // begin growth coroutine
-            if (growthRoutine != null) StopCoroutine(growthRoutine);
-            growthRoutine = StartCoroutine(GrowthRoutine());
-        }
+        cropSR.sprite = cropSprite;
+        planting = Instantiate(currentSeedPrefab, cropSR.transform);
     }
 
-    IEnumerator GrowthRoutine()
+    public void HarvestCrop()
     {
-        State = CropState.Growing;
-        while (currentStage < Mathf.Min(3, plantedSeed.growthSprites.Length - 1))
+        if (planting.readyToHarvest)
         {
-            // Only advance if watered; otherwise wait and try again each second
-            float timer = 0f;
-            while (timer < plantedSeed.secondsPerStage)
-            {
-                // if watered, accelerate / allow timer to progress
-                if (watered) timer += Time.deltaTime;
-                else timer += Time.deltaTime * 0.2f; // slow dry growth (adjust or require watering)
-                yield return null;
-            }
-
-            currentStage++;
-            watered = false; // consume watering
-            UpdateSprite();
-            yield return null;
+            planting.ConvertToYield();
         }
-
-        // reached final stage
-        State = CropState.ReadyToHarvest;
-        UpdateSprite();
-    }
-
-    void UpdateSprite()
-    {
-        if (plantedSeed == null)
-        {
-            spriteRenderer.sprite = null;
-            return;
-        }
-
-        int idx = Mathf.Clamp(currentStage, 0, plantedSeed.growthSprites.Length - 1);
-        spriteRenderer.sprite = plantedSeed.growthSprites[idx];
-    }
-
-    public void Harvest()
-    {
-        if (State == CropState.ReadyToHarvest)
-        {
-            // spawn harvestable if provided
-            if (plantedSeed.harvestablePrefab != null)
-            {
-                Instantiate(plantedSeed.harvestablePrefab, transform.position, Quaternion.identity);
-            }
-            // reset
-            plantedSeed = null;
-            currentStage = 0;
-            State = CropState.Empty;
-            spriteRenderer.sprite = null;
-        }
-    }
-
-    // Optional: helper to force-stop growth (used when removing)
-    public void ClearBlock()
-    {
-        if (growthRoutine != null) StopCoroutine(growthRoutine);
-        plantedSeed = null;
-        currentStage = 0;
-        watered = false;
-        State = CropState.Empty;
-        spriteRenderer.sprite = null;
     }
 }

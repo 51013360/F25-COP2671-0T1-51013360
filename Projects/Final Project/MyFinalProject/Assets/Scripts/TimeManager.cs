@@ -13,6 +13,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 
     // Events triggered during time updates and hourly changes
     public static UnityEvent<float> OnTimerUpdate = new UnityEvent<float>();       // Normalized time update (0 to 1)
+    public static UnityEvent OnNewDay = new UnityEvent();
 
     [Header("Time Settings")]
     [SerializeField] private float _realTimeMinutesPerDay = 15f; // Duration of one in-game day in real minutes
@@ -27,6 +28,7 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
     [SerializeField] private float _calculateTime;
     [SerializeField] private float _normalizedTime;   // Value between 0 and 1 representing time progression
     private float _updateTimer;      // Accumulated real-time seconds
+    private float _lastNormalizedTime = 0f;
 
     /// <summary>
     /// Starts the day cycle coroutine when the game begins.
@@ -54,6 +56,14 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 
             // Normalize time to a 0�1 range
             _normalizedTime = (_calculateTime % DurationOfDayInSeconds) / DurationOfDayInSeconds;
+
+            // Detect day wrap (0.99 → 0.00)
+            if (_normalizedTime < _lastNormalizedTime)
+            {
+                OnNewDay?.Invoke();
+            }
+
+            _lastNormalizedTime = _normalizedTime;
 
             // Trigger OnTimerUpdate event every frame
             OnTimerUpdate?.Invoke(_normalizedTime);
