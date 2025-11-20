@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.U2D;
-using static Seedling;
 
 public class Seedling : MonoBehaviour
 {
@@ -12,19 +10,27 @@ public class Seedling : MonoBehaviour
         Young = 2,
         Mature = 3,
     }
+
     public Sprite[] growthSprites;
     public Sprite seedCover;
-    //public CropYield cropYield;
     public bool readyToHarvest;
 
     private GrowthStage currentStage = GrowthStage.Seed;
     private SpriteRenderer spriteRenderer;
-    [SerializeField] private bool nextDay;
-    
+
+    // Assigned by CropBlock when planting
+    [HideInInspector]public CropBlock parentBlock;
+
+    private bool nextDay;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Save original sprite as seed cover
         seedCover = spriteRenderer.sprite;
+
+        // Seedlings start invisible (seed under dirt)
         spriteRenderer.sprite = null;
     }
 
@@ -40,29 +46,38 @@ public class Seedling : MonoBehaviour
 
     private void Update()
     {
-        if (nextDay == false || currentStage > GrowthStage.Mature) return;
+        if (!nextDay) return;
         nextDay = false;
 
+        // Only grow if watered
+        if (parentBlock == null || !parentBlock.isWatered)
+            return;
+
+        if (currentStage >= GrowthStage.Mature)
+            return;
+
+        // Grow
         currentStage++;
         spriteRenderer.sprite = growthSprites[(int)currentStage];
 
+        // After growing, consume water for the next day
+        parentBlock.isWatered = false;
+        if (parentBlock.waterSR != null)
+            parentBlock.waterSR.sprite = null;
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         readyToHarvest = currentStage == GrowthStage.Mature;
     }
-    
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         readyToHarvest = false;
     }
-    
+
     public void ConvertToYield()
     {
-        //var yield = Instantiate(cropYield, transform);
-        //yield.transform.SetParent(null);
-
         Destroy(gameObject);
     }
 

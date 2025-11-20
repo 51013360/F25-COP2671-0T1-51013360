@@ -163,7 +163,7 @@ SpriteRenderer:
   m_SortingLayerID: 626437121
   m_SortingLayer: -1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 846023351496318078, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -171,7 +171,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &5622881743204298635
@@ -279,4 +279,7 @@ MonoBehaviour:
   soilSR: {fileID: 7060100066820668633}
   cropSR: {fileID: 5577458706420073117}
   waterSR: {fileID: 1747219251572358324}
-  currentSeedPrefab: {fileID: 6676619660323576563, guid: e60cbe660f41f1143a7161575ef9ed23, type: 3}
+  plowedSprite: {fileID: -2331644291845863066, guid: 567c906ed8e5d7943846be7ab9519dc8, type: 3}
+  waterSprite: {fileID: -5165473094759880173, guid: 567c906ed8e5d7943846be7ab9519dc8, type: 3}
+  cropSprite: {fileID: 3434212400135504495, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
+  seedlingPrefab: {fileID: 4695015363033266634, guid: e60cbe660f41f1143a7161575ef9ed23, type: 3}
