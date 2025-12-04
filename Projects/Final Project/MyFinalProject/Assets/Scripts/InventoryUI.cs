@@ -1,57 +1,36 @@
 using UnityEngine;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static InventoryUI Instance;
-    public GameObject inventoryPanel;
+    public Inventory inventory;
     public GameObject slotPrefab;
-    public Transform slotGrid;
+    public Transform slotParent;
 
-    private InventorySlotUI[] uiSlots;
-    private bool isOpen = false;
-
-    void Awake()
+    private void OnEnable()
     {
-        Instance = this;
-
-        // Create 8 UI slots dynamically
-        uiSlots = new InventorySlotUI[8];
-
-        for (int i = 0; i < 8; i++)
-        {
-            GameObject slotObj = Instantiate(slotPrefab, slotGrid);
-            uiSlots[i] = slotObj.GetComponent<InventorySlotUI>();
-            uiSlots[i].Clear();
-        }
+        inventory.OnInventoryChanged += Refresh;
+        Refresh();
     }
 
-    void Update()
+    private void OnDisable()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            ToggleInventory();
-        }
+        inventory.OnInventoryChanged -= Refresh;
     }
 
-    public void ToggleInventory()
+    void Refresh()
     {
-        isOpen = !isOpen;
-        inventoryPanel.SetActive(isOpen);
+        foreach (Transform t in slotParent)
+            Destroy(t.gameObject);
 
-        if (isOpen)
-            RefreshUI();
-    }
-
-    public void RefreshUI()
-    {
-        var items = InventorySystem.Instance.slots;
-
-        for (int i = 0; i < 8; i++)
+        foreach (var pair in inventory.items)
         {
-            if (items[i] != null)
-                uiSlots[i].SetItem(items[i].icon, items[i].count);
-            else
-                uiSlots[i].Clear();
+            GameObject slot = Instantiate(slotPrefab, slotParent);
+            slot.transform.GetChild(1).GetComponent<TMP_Text>().text = pair.Value.ToString();
+
+            // icon
+            ItemData data = Resources.Load<ItemData>("Items/" + pair.Key);
+            slot.transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = data.icon;
         }
     }
 }

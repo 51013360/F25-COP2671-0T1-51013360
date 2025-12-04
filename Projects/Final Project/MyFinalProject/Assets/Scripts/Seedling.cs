@@ -57,6 +57,14 @@ public class Seedling : MonoBehaviour
 
     public void ConvertToYield()
     {
+        Inventory inv = FindAnyObjectByType< Inventory>();
+
+        // you will assign ItemData on each seed prefab
+        ItemData data = Resources.Load<ItemData>("Items/" + seedName);
+
+        if (inv != null && data != null)
+            inv.AddItem(data);
+
         Destroy(transform.root.gameObject);
     }
 
