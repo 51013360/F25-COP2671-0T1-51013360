@@ -2,4 +2,6 @@
 ## How to Move
 You move the player using the WASD keys on your keyboard.
 ## How to Use Actions
-You plow, water, plant, and harvest using the 1, 2, 3, and 4 keys, respectively. Alternatively, you can click on the four buttons along the bottom of the screen
+You plow, water, plant, and harvest using the 1, 2, 3, and 4 keys on the keyboard, respectively. Alternatively, you can click on the four buttons along the bottom of the game screen. Inventory can be opened using the tab key.
+## Limitations
+You can only farm during the day in the Day/Night cycle. The normalized time on time manager must be between 0.25 and 0.75 for the player to be able to plow, water, plant, or harvest. You can only farm on the patch of dirt in front of the house as well. The game will automatically plow, water, and plant the closest dirt tile when the actions are activated. The dirt has be to plowed and watered, in that order, to be able to plant a seed. Each new day, watering will become undone, and the planted crop must be watered to grow to the next stage on new day. Once mature, the player must be directly covering plant in order to be able to harvest. If initially harvest does not work, try moving out of the way completely, and then go back to covering the fully grown plant and try again. Harvesting will delete the entire plowed, watered dirt tile along with the mature plant. The harvested plant will then show on the inventory.
