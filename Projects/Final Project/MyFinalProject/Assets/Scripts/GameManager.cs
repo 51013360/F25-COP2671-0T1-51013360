@@ -1,73 +1,95 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
-using System.Linq;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
     public Tilemap cropGrid;
     public Transform player;
-
     public GameObject cropBlockPrefab;
-    public GameObject seedlingPrefab;
 
     private void Update()
     {
         if (Keyboard.current.digit1Key.wasPressedThisFrame)
         {
-            CropBlock target = GetClosestCropBlock();
-            if (target == null)
-                target = SpawnCropBlock();
-
-            target.PlowCrop();
+            PlowAction();
         }
 
         if (Keyboard.current.digit2Key.wasPressedThisFrame)
         {
-            CropBlock target = GetClosestCropBlock();
-            if (target != null)
-                target.WaterCrop();
+            WaterAction();
         }
 
         if (Keyboard.current.digit3Key.wasPressedThisFrame)
         {
-            CropBlock target = GetClosestCropBlock();
-            if (target != null)
-                target.PlantCrop();
+            PlantAction();
         }
 
         if (Keyboard.current.digit4Key.wasPressedThisFrame)
         {
-            CropBlock target = GetClosestCropBlock();
-            if (target != null)
-                target.HarvestCrop();
+            HarvestAction();
         }
     }
 
-    private CropBlock SpawnCropBlock()
+    public void PlowAction()
+    {
+        if (!TimeManager.isDay)
+        {
+            Debug.Log("Can only farm during the day");
+            return;
+        }
+
+        CropBlock newBlock = SpawnCropBlock();
+        if (newBlock != null) newBlock.PlowCrop();
+    }
+
+    public void WaterAction()
+    {
+        CropBlock target = GetClosestCropBlock();
+        if (target != null) target.WaterCrop();
+    }
+
+    public void PlantAction()
+    {
+        CropBlock target = GetClosestCropBlock();
+        if (target != null) target.PlantCrop();
+    }
+
+    public void HarvestAction()
+    {
+        CropBlock target = GetClosestCropBlock();
+        if (target != null) target.HarvestCrop();
+    }
+
+    public CropBlock SpawnCropBlock()
     {
         Vector3Int cellPos = cropGrid.WorldToCell(player.position);
         Vector3 spawnPos = cropGrid.GetCellCenterWorld(cellPos);
+
+        if (cropGrid.GetTile(cellPos) == null)
+        {
+            Debug.Log("Cannot plant here: no farmable tile.");
+            return null;
+        }
+
         spawnPos.z = 0;
 
         GameObject obj = Instantiate(cropBlockPrefab, spawnPos, Quaternion.identity);
         return obj.GetComponent<CropBlock>();
     }
 
-    private CropBlock GetClosestCropBlock()
+    public CropBlock GetClosestCropBlock()
     {
         CropBlock[] allBlocks = FindObjectsByType<CropBlock>(FindObjectsSortMode.None);
-
-        if (allBlocks.Length == 0)
-            return null;
+        if (allBlocks.Length == 0) return null;
 
         CropBlock closest = null;
-        float closestDist = float.MaxValue;
+        float closestDist = Mathf.Infinity;
 
         foreach (var block in allBlocks)
         {
             float dist = Vector3.Distance(player.position, block.transform.position);
-
             if (dist < closestDist)
             {
                 closestDist = dist;

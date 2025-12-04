@@ -30,6 +30,8 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
     private float _updateTimer;      // Accumulated real-time seconds
     private float _lastNormalizedTime = 0f;
 
+    public static bool isDay;
+
     /// <summary>
     /// Starts the day cycle coroutine when the game begins.
     /// </summary>
@@ -56,6 +58,15 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
 
             // Normalize time to a 0�1 range
             _normalizedTime = (_calculateTime % DurationOfDayInSeconds) / DurationOfDayInSeconds;
+
+            if (_normalizedTime >= 0.25f && _normalizedTime <= 0.75f)
+            {
+                isDay = true;
+            }
+            else
+            {
+                isDay = false;
+            }
 
             // Detect day wrap (0.99 → 0.00)
             if (_normalizedTime < _lastNormalizedTime)

@@ -282,4 +282,9 @@ MonoBehaviour:
   plowedSprite: {fileID: -2331644291845863066, guid: 567c906ed8e5d7943846be7ab9519dc8, type: 3}
   waterSprite: {fileID: -5165473094759880173, guid: 567c906ed8e5d7943846be7ab9519dc8, type: 3}
   cropSprite: {fileID: 3434212400135504495, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
-  seedlingPrefab: {fileID: 4695015363033266634, guid: e60cbe660f41f1143a7161575ef9ed23, type: 3}
+  currentSeedlingPrefab: {fileID: 0}
+  potatoSeedlingPrefab: {fileID: 4695015363033266634, guid: e60cbe660f41f1143a7161575ef9ed23, type: 3}
+  leekSeedlingPrefab: {fileID: 3626610602517173293, guid: 4ceb2b10f1999a943b6f55295d069b16, type: 3}
+  garlicSeedlingPrefab: {fileID: 8129093442556475180, guid: 32cda15aa44e9a24a866940371b05201, type: 3}
+  beetSeedlingPrefab: {fileID: 818160677371861987, guid: fe0ef42ed12e67f479294b8ac7637c66, type: 3}
+  isWatered: 0
