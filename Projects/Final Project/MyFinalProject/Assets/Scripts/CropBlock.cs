@@ -15,10 +15,6 @@ public class CropBlock : MonoBehaviour
 
     [Header("Prefabs")]
     public GameObject currentSeedlingPrefab;
-    public GameObject potatoSeedlingPrefab;
-    public GameObject leekSeedlingPrefab;
-    public GameObject garlicSeedlingPrefab;
-    public GameObject beetSeedlingPrefab;
 
     [HideInInspector] public bool isWatered = false;
 
@@ -75,20 +71,21 @@ public class CropBlock : MonoBehaviour
     {
         if (!isPlowed || !isWatered || isPlanted) return;
 
-        if (currentSeedlingPrefab != null && cropSR != null)
-        {
-            GameObject go = Instantiate(currentSeedlingPrefab, cropSR.transform);
-            go.transform.localPosition = Vector3.zero;
+        // Get the current selected prefab from CropSelectorLink
+        GameObject prefabToPlant = FindFirstObjectByType<CropSelectorLink>().selectedPrefab;
+        if (prefabToPlant == null) return;
 
-            planting = go.GetComponent<Seedling>();
-            planting.parentBlock = this;
+        GameObject go = Instantiate(prefabToPlant, cropSR.transform);
+        go.transform.localPosition = Vector3.zero;
 
-            if (cropSprite != null)
-                cropSR.sprite = cropSprite;
+        planting = go.GetComponent<Seedling>();
+        planting.parentBlock = this;
+        isPlanted = true;
 
-            isPlanted = true;
-            Debug.Log($"Planted at {transform.position}");
-        }
+        if (cropSprite != null)
+            cropSR.sprite = cropSprite;
+
+        Debug.Log($"Planted {prefabToPlant.name} at {transform.position}");
     }
 
     public void HarvestCrop()

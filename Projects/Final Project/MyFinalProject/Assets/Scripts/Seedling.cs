@@ -58,12 +58,19 @@ public class Seedling : MonoBehaviour
 
     public void ConvertToYield()
     {
-        Inventory inv = FindAnyObjectByType<Inventory>();
+        Inventory inv = FindFirstObjectByType<Inventory>();
 
         ItemData data = Resources.Load<ItemData>("Items/" + seedName);
 
         if (inv != null && data != null)
+        {
             inv.AddItem(data);
+        }
+        else
+        {
+            Debug.LogWarning("Inventory or ItemData not found for seed: " + seedName);
+        }
+
 
         Destroy(transform.root.gameObject);
     }

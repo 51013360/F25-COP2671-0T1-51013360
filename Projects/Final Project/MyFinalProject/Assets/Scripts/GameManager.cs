@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Tilemap cropGrid;
     public Transform player;
     public GameObject cropBlockPrefab;
+    public CropBlock currentCropPrefab;
 
     private void Update()
     {

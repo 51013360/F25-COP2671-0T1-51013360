@@ -11,4 +11,3 @@ public class InventoryToggle : MonoBehaviour
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }
 }
-
