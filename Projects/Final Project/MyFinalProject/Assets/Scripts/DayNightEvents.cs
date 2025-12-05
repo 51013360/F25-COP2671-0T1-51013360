@@ -1,9 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-/// <summary>
-/// Handles events that occur at sunrise and sunset based on the in-game time.
-/// </summary>
 public class DayNightEvents : MonoBehaviour
 {
     [Header("Event Hours")]
@@ -14,16 +11,19 @@ public class DayNightEvents : MonoBehaviour
     public UnityEvent OnSunrise;
     public UnityEvent OnSunset;
 
+    // Flags to ensure each event triggers only once per cycle
     private bool _sunriseTriggered;
     private bool _sunsetTriggered;
 
     private void OnEnable()
     {
+        // Subscribe to the time update event
         TimeManager.OnTimerUpdate.AddListener(HandleTimeUpdate);
     }
 
     private void OnDisable()
     {
+        // Unsubscribe from the time update event
         TimeManager.OnTimerUpdate.RemoveListener(HandleTimeUpdate);
     }
 

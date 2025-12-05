@@ -24,10 +24,11 @@ public class CropBlock : MonoBehaviour
 
     private void Awake()
     {
-        // Ensure initial visuals
+        // Ensure all visuals are correctly reset when the block is created
         if (cropSR != null) cropSR.sprite = null;
         if (waterSR != null) waterSR.sprite = null;
 
+        // Reset all states
         isPlowed = false;
         isPlanted = false;
         isWatered = false;
@@ -36,16 +37,19 @@ public class CropBlock : MonoBehaviour
 
     private void OnEnable()
     {
+        // Subscribe to the OnNewDay event from TimeManager
         TimeManager.OnNewDay.AddListener(HandleNewDay);
     }
 
     private void OnDisable()
     {
+        // Unsubscribe when the object is disabled to prevent memory leaks
         TimeManager.OnNewDay.RemoveListener(HandleNewDay);
     }
 
     public void PlowCrop()
     {
+        // Can only plow if not already plowed and during the day
         if (!isPlowed && TimeManager.isDay)
         {   
             if (soilSR != null && plowedSprite != null)
@@ -57,9 +61,11 @@ public class CropBlock : MonoBehaviour
 
     public void WaterCrop()
     {
+        // Check if the block is plowed and not already watered
         if (!isPlowed) return;
         if (isWatered) return;
 
+        // Update the water sprite to indicate watering
         if (waterSR != null && waterSprite != null)
             waterSR.sprite = waterSprite;
 
@@ -69,19 +75,23 @@ public class CropBlock : MonoBehaviour
 
     public void PlantCrop()
     {
+        // Can only plant if the block is plowed, watered, and not already planted
         if (!isPlowed || !isWatered || isPlanted) return;
 
         // Get the current selected prefab from CropSelectorLink
         GameObject prefabToPlant = FindFirstObjectByType<CropSelectorLink>().selectedPrefab;
         if (prefabToPlant == null) return;
 
+        // Instantiate the seedling prefab as a child of the crop sprite renderer
         GameObject go = Instantiate(prefabToPlant, cropSR.transform);
         go.transform.localPosition = Vector3.zero;
 
+        // Set up the Seedling component
         planting = go.GetComponent<Seedling>();
         planting.parentBlock = this;
         isPlanted = true;
 
+        // Update the crop sprite to indicate planting
         if (cropSprite != null)
             cropSR.sprite = cropSprite;
 
@@ -90,7 +100,10 @@ public class CropBlock : MonoBehaviour
 
     public void HarvestCrop()
     {
+        // Can only harvest if there is a planting and it's ready to harvest
         if (planting == null) return;
+
+        // Check if the crop is ready to harvest
         if (planting.readyToHarvest)
         {
             planting.ConvertToYield();

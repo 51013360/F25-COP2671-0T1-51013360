@@ -15,16 +15,19 @@ public class DayNightLighting : MonoBehaviour
 
     private void Awake()
     {
+        // Get the Light2D component
         _light = GetComponent<Light2D>();
     }
 
     private void OnEnable()
     {
+        // Subscribe to the time update event
         TimeManager.OnTimerUpdate.AddListener(UpdateLighting);
     }
 
     private void OnDisable()
     {
+        // Unsubscribe from the time update event
         TimeManager.OnTimerUpdate.RemoveListener(UpdateLighting);
     }
 

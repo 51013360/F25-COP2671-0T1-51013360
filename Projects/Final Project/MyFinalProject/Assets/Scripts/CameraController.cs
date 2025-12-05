@@ -28,7 +28,10 @@ public class CameraFollow : MonoBehaviour
         float clampedX = Mathf.Clamp(desiredPosition.x, minBounds.x + camHalfWidth, maxBounds.x - camHalfWidth);
         float clampedY = Mathf.Clamp(desiredPosition.y, minBounds.y + camHalfHeight, maxBounds.y - camHalfHeight);
 
+        // Set the new camera position with smoothed clamped values
         Vector3 smoothedPosition = new Vector3(clampedX, clampedY, transform.position.z);
+
+        // Update the camera's position
         transform.position = smoothedPosition;
     }
 }

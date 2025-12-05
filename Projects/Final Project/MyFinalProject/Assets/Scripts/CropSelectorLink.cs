@@ -1,6 +1,8 @@
 using UnityEngine;
 using TMPro;
 
+// This script links a TMP_Dropdown UI to the prefabs of crops.
+// It determines which crop prefab is currently selected for planting.
 public class CropSelectorLink : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
@@ -17,6 +19,7 @@ public class CropSelectorLink : MonoBehaviour
     {
         if (dropdown == null)
         {
+            // Error if dropdown is not assigned in the inspector
             Debug.LogError("Dropdown not assigned!");
             return;
         }
@@ -30,8 +33,10 @@ public class CropSelectorLink : MonoBehaviour
 
     private void UpdateSelectedPrefab(int index)
     {
+        // Get the text of the selected dropdown option
         string cropName = dropdown.options[index].text;
 
+        // Assign the corresponding prefab based on the selected crop
         switch (cropName)
         {
             case "Potato": selectedPrefab = potatoPrefab; break;
@@ -39,11 +44,13 @@ public class CropSelectorLink : MonoBehaviour
             case "Garlic": selectedPrefab = garlicPrefab; break;
             case "Beet": selectedPrefab = beetPrefab; break;
             default:
+                // If the option doesn't match any known crop, log a warning
                 Debug.LogWarning("Unknown crop selected: " + cropName);
                 selectedPrefab = null;
                 break;
         }
 
+        // Log the currently selected prefab for debugging
         Debug.Log("Selected seedling prefab: " + selectedPrefab);
     }
 }

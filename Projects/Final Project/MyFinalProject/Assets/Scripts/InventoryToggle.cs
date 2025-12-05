@@ -7,6 +7,7 @@ public class InventoryToggle : MonoBehaviour
 
     private void Update()
     {
+        // Toggle inventory panel visibility when 'I' key is pressed
         if (Keyboard.current.iKey.wasPressedThisFrame)
             inventoryPanel.SetActive(!inventoryPanel.activeSelf);
     }

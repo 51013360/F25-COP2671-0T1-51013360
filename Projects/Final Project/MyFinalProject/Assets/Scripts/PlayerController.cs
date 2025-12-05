@@ -22,8 +22,10 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Read and normalize player input
         _lastPlayerInput = PlayerInput.normalized;
 
+        // Determine if the player is moving
         bool isMoving = _lastPlayerInput.sqrMagnitude > 0.01f;
 
         // Handle flipping for left movement
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // Apply movement to the rigidbody
         _rigidBody.linearVelocity = _lastPlayerInput * _playerSpeed;
     }
 }
