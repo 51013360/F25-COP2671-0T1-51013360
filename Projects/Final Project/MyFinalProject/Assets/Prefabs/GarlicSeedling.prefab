@@ -109,6 +109,7 @@ MonoBehaviour:
   seedCover: {fileID: 5349869915956102173, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
   readyToHarvest: 0
   seedName: Garlic
+  itemData: {fileID: 11400000, guid: f2e6081d393d6cb43b2ace8a425e8169, type: 2}
   parentBlock: {fileID: 0}
 --- !u!61 &4490649996199445888
 BoxCollider2D:

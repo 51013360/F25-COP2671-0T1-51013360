@@ -109,6 +109,7 @@ MonoBehaviour:
   seedCover: {fileID: 1610818135, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
   readyToHarvest: 0
   seedName: Leek
+  itemData: {fileID: 11400000, guid: 8adddec5ca17a7545b583ea6d8bae3c4, type: 2}
   parentBlock: {fileID: 0}
 --- !u!61 &2591587917293185542
 BoxCollider2D:

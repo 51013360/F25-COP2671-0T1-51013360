@@ -109,6 +109,7 @@ MonoBehaviour:
   seedCover: {fileID: 7557663613922564261, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
   readyToHarvest: 0
   seedName: Potato
+  itemData: {fileID: 11400000, guid: 5273a95207472014d99d663937e77efe, type: 2}
   parentBlock: {fileID: 0}
 --- !u!61 &5550694751602479075
 BoxCollider2D:

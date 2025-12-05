@@ -109,6 +109,7 @@ MonoBehaviour:
   seedCover: {fileID: 4424967949123141699, guid: 3c0fd9e79fa04564cb25b27e59aceaac, type: 3}
   readyToHarvest: 0
   seedName: Beet
+  itemData: {fileID: 11400000, guid: 3e415f90a0fd99341970ba0d1f586514, type: 2}
   parentBlock: {fileID: 0}
 --- !u!61 &6645668166204187958
 BoxCollider2D:
